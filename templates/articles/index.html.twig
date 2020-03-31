@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PinsController!
+{% endblock %}
+
+{% block body %}
+	<div class="ui middle aligned stackable grid container">
+		<div class="row">
+			{% for article in articles %}
+				<div class="four wide column">
+					<div class="ui card ">
+						<div class="image">
+							<img src="{{ article.image }}">
+						</div>
+						<div class="content">
+							<a href="{{ path("article_show", {id: article.id}) }}" class="header">{{ article.title }}</a>
+							<div class="meta">
+								<span class="date">Ecrit le {{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</span>
+								- <span>Dans {{ article.category.title }}</span>
+							</div>
+							<div class="description">
+								{{ article.description | striptags|slice(0, 100)  }} ...
+							</div>
+						</div>
+						<div class="extra content">
+							<a href="{{ path("article_show", {id: article.id}) }}">
+								<i class="comment icon"></i>
+								{{ article.comments.count }} comments
+							</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

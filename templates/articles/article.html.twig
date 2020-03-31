@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home page
+{% endblock %}
+
+{% block body %}
+    <div class="ui middle aligned stackable grid container">
+        <div class="row">
+            <div class="column">
+                <a href="{{ path("article_edit", {id: article.id}) }}">
+                    <button class="ui button">
+                        Editer
+                    </button>
+                </a>
+                <div class="ui items">
+                    <div class="item">
+                        <div class="image">
+                            <img src="{{ article.image }}" alt="">
+                        </div>
+                        <div class="content">
+                            <a class="header">{{ article.title }}</a>
+
+                            <div class="meta">
+                                <div class="extra">
+                                    <span class="date">Ecrit le {{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</span>
+                                    - <span>Dans {{ article.category.title }}</span>
+                                </div>
+
+                                <span>{{ article.description | raw}}</span>
+                            </div>
+                            <div class="description">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="four column centered row">
+                <div class="column">
+                    <div class="ui comments ">
+                        <h3 class="ui dividing header">Comments</h3>
+
+                        {% for comment in article.comments %}
+
+                        <div class="comment">
+                            <a class="avatar">
+                                {% if(comment.author | split(' ')[1] is defined) %}
+                                    <img src="https://eu.ui-avatars.com/api/?name={{ comment.author | split(' ')[0] }}+{{ comment.author | split(' ')[1] }}">
+                                {% else %}
+                                    <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="">
+                                {% endif %}
+
+                            </a>
+                            <div class="content">
+                                <a class="author">{{ comment.author }}</a>
+                                <div class="metadata">
+                                    <span class="date">Le {{ comment.createdAt | date("d/m/Y") }} à {{ comment.createdAt | date("H:i") }}</span>
+                                </div>
+                                <div class="text">
+                                    {{ comment.content | raw }}
+                                </div>
+                                <div class="actions">
+                                    <a class="reply">Reply</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                        <div class="ui section divider"></div>
+
+                            {% if app.user %}
+                            {{ form_start(commentForm, {attr: {'class': 'ui form'}}) }}
+                            {{ form_widget(commentForm.content, {
+                                attr:
+                                {
+                                    'placeholder': 'Entrez votre commentaire',
+                                    'class': 'field'
+                                }
+                            }) }}
+                            <button class="ui button" type="submit">
+                                Ajouter commentaire
+                            </button>
+                            {{ form_end(commentForm) }}
+                            {% else %}
+                            <div class="ui middle aligned stackable grid container">
+                                <div class="row">
+                                    <div class="center aligned column">
+                                        <a class="ui huge button" href="{{  path('security_login') }}">Ajouter un commentaire</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

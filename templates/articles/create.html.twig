@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create
+{% endblock %}
+
+{% block body %}
+     <div class="ui middle aligned stackable grid container">
+          <div class="row">
+               <h2>
+               {% if editMode %}
+                    Modifier l'article
+               {% else %}
+                    Ajouter un article
+               {% endif %}
+               </h2>
+          </div>
+          <div class="row">
+              <div class="column">
+               {{ form_start(formArticle, {attr: {'class': 'ui form'}}) }}
+                    <div class="field">
+                         {#{{ form_row(formArticle.title, {attr:{'placeholder': 'Entrez un titre'}}) }}#}
+                         {{ form_widget(formArticle.title, {
+                                   attr:
+                                   {
+                                        'placeholder': 'Entrez un titre',
+                                        'class': 'field'
+                                   }
+                              })
+                         }}
+                    </div>
+                    <div class="field">
+                         {{ form_widget(formArticle.description, {attr:{
+                              'placeholder': 'Entrez une description',
+                              'class': 'field'
+                         }}) }}
+                    </div>
+                    <div class="field">
+
+                         {{ form_widget(formArticle.category, {"attr": {
+                              "class": "ui fluid dropdown"
+                         }}) }}
+                    </div>
+                    <div class="field">
+                         {{ form_row(formArticle.image) }}
+                    </div>
+                    <button class="ui button" type="submit">
+                         {% if editMode %}
+                              Enregistrer les modifications
+                         {% else %}
+                              Ajouter
+                         {% endif %}
+                    </button>
+               {{ form_end(formArticle) }}
+              </div>
+          </div>
+     </div>
+{% endblock %}

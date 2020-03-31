@@ -30,9 +30,10 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
-        "symfony/debug-pack": "*",
-        "symfony/maker-bundle": "^1.0",
-        "symfony/profiler-pack": "*",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "fzaninotto/faker": "^1.9",
+        "symfony/debug-pack": "^1.0",
+        "symfony/maker-bundle": "^1.14",
         "symfony/test-pack": "*"
     },
     "config": {

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <div class="ui middle aligned stackable grid container">
+        <div class="row">
+            <h2>Créer un compte</h2>
+        </div>
+        <div class="row">
+            <div class="column">
+                {{ form_start(formRegistration, {attr: {'class': 'ui form'}}) }}
+                <div class="field">
+                    {#{{ form_row(formArticle.title, {attr:{'placeholder': 'Entrez un titre'}}) }}#}
+                    {{ form_widget(formRegistration.username, {
+                        attr:
+                        {
+                            'placeholder': 'Entrez un username',
+                            'class': 'field'
+                        }
+                    })
+                    }}
+                </div>
+                <div class="field">
+                    {{ form_errors(formRegistration.email, {attr:{'class':'ui error message'}}) }}
+                    {{ form_widget(formRegistration.email, {
+                        attr:
+                        {
+                            'placeholder': 'Entrez un email',
+                            'class': 'field'
+                        }
+                    })
+                    }}
+                </div>
+                <div class="field">
+                    {{ form_errors(formRegistration.password, {attr:{'class':'ui error message'}}) }}
+                    {{ form_widget(formRegistration.password, {
+                        attr:
+                        {
+                            'placeholder': 'Entrez un mot de passe',
+                            'class': 'field'
+                        }
+                    })
+                    }}
+                </div>
+                <div class="field">
+                    {{ form_errors(formRegistration.confirm_password, {attr:{'class':'ui error message'}}) }}
+                    {{ form_widget(formRegistration.confirm_password, {
+                        attr:
+                        {
+                            'placeholder': 'Confirmer le mot de passe',
+                            'class': 'field'
+                        }
+                    })
+                    }}
+                </div>
+
+                <button class="ui button" type="submit">
+                    Créer mon compte
+                </button>
+                <a href="{{ path('security_login') }}">Déja un compte ?</a>
+                {{ form_end(formRegistration) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
